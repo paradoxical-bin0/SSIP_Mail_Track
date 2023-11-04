@@ -5,9 +5,9 @@ collections.Iterable = collections.abc.Iterable
 collections.Mapping = collections.abc.Mapping
 collections.MutableSet = collections.abc.MutableSet
 collections.MutableMapping = collections.abc.MutableMapping
-# import dns.resolve
-import dns
-
+# import dns
+import dns.resolver
+resolver = dns.resolver.Resolver()
 
 import geoip2
 from flask import Flask
@@ -229,13 +229,16 @@ def dns():
     if request.method == 'POST':
         input_text = request.form['domain-name-input']
         response = f"You entered: {input_text}"
+
         #  shivam's code 
+        print('INIT')
         ips = []
-        domain = 'iitram.ac.in'
+        domain = input_text
         try:
-            answers = dns.resolver.resolve(domain, 'A')
+            answers = resolver.query(domain, 'A')
             for answer in answers:
                 ips.append(str(answer))
+            print(answer)
         except (dns.resolver.NXDOMAIN , dns.resolver.NoAnswer , dns.resolver.Timeout , Exception):
             pass
         data = None
@@ -253,8 +256,8 @@ def dns():
         data1 = [
                 {"Domain_name": domain, "ip": ip}
             ]
-        data2 = [data] 
-        return render_template('dns.html', data1=data1,data2=data2)
+        data2 = [data]
+        return render_template('dns.html',data1=data1,data2=data2)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Email Header Analysis Author: SK")

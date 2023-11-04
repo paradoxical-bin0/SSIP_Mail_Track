@@ -136,7 +136,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Email Tracer</a>
+          <a class="navbar-brand" href="/">Header Analyze</a>
+          <a href="/dns" class="navbar-brand">DNS Lookup</a>
         </div>
 
         <div id="navbar" class="collapse navbar-collapse">
@@ -177,8 +178,8 @@
                    
                 </tr>
                 <tr> <!-- Row for details -->
-                    <td>{Detail 1}</td>
-                    <td>{Detail 2}</td>
+                    <td>{{data1[0].get('Domain_name')}}</td>
+                    <td>{{data1[0].get('ip')}}</td>
                     
                 </tr>
             </table>
@@ -187,7 +188,7 @@
         <div class="table-container">
             <table>
                 <tr> <!-- Row for headings -->
-                    <th>IP</th>
+                    <th>Ip Address</th>
                     <th>Hostname</th>
                     <th>City</th>
                     <th>Region</th>
@@ -197,14 +198,14 @@
                     <th>Timezone</th>
                 </tr>
                 <tr> <!-- Row for details -->
-                    <td>Detail 1</td>
-                    <td>Detail 2</td>
-                    <td>Detail 3</td>
-                    <td>Detail 4</td>
-                    <td>Detail 5</td>
-                    <td>Detail 6</td>
-                    <td>Detail 7</td>
-                    <td>Detail 8</td>
+                    <td>{{data2[0].get('ip')}}</td>
+                    <td>{{data2[0].get('hostname')}}</td>
+                    <td>{{data2[0].get('city')}}</td>
+                    <td>{{data2[0].get('region')}}</td>
+                    <td>{{data2[0].get('country')}}</td>
+                    <td>{{data2[0].get('loc')}}</td>
+                    <td>{{data2[0].get('postal')}}</td>
+                    <td>{{data2[0].get('timezone')}}</td>
                 </tr>
             </table>
         </div>
