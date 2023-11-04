@@ -1,6 +1,14 @@
 #!/usr/bin/env python
 # Copyright 2021, Shubham Khapra and The Email header analysis
 # See LICENSE for licensing information
+
+import collections.abc
+#hyper needs the four following aliases to be done manually.
+collections.Iterable = collections.abc.Iterable
+collections.Mapping = collections.abc.Mapping
+collections.MutableSet = collections.abc.MutableSet
+collections.MutableMapping = collections.abc.MutableMapping
+
 import geoip2
 from flask import Flask
 from flask import render_template
@@ -20,9 +28,6 @@ import geoip2.database
 import geoip2_tools.database
 
 import argparse
-print(" Author  : Shubham Khapra ")
-print("Github  : https://github.com/Shubhamkhapra  ")
-print("=========================================")
 
 app = Flask(__name__)
 
@@ -152,6 +157,8 @@ def index():
                         |\sid\s
                     )""", line[0], re.DOTALL | re.X)
 
+            print("org_time:", org_time)
+            print("next_time:", next_time)
             delay = (org_time - next_time).seconds
             if delay < 0:
                 delay = 0
