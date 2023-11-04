@@ -1,4 +1,4 @@
-/* .fixed-table-container .bs-checkbox,
+.fixed-table-container .bs-checkbox,
 .fixed-table-container .no-records-found {
   text-align: center;
 }
@@ -236,4 +236,4 @@ div.fixed-table-scroll-outer {
   width: 200px;
   height: 150px;
   overflow: hidden;
-} */
+}

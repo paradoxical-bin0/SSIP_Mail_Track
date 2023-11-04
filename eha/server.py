@@ -1,13 +1,13 @@
-#!/usr/bin/env python
-# Copyright 2021, Shubham Khapra and The Email header analysis
-# See LICENSE for licensing information
 
+import requests
 import collections.abc
-#hyper needs the four following aliases to be done manually.
 collections.Iterable = collections.abc.Iterable
 collections.Mapping = collections.abc.Mapping
 collections.MutableSet = collections.abc.MutableSet
 collections.MutableMapping = collections.abc.MutableMapping
+# import dns.resolve
+import dns
+
 
 import geoip2
 from flask import Flask
@@ -79,8 +79,6 @@ def dateParser(line):
     try:
         r = dateutil.parser.parse(line, fuzzy=True)
 
-    # if the fuzzy parser failed to parse the line due to
-    # incorrect timezone information issue #5 GitHub
     except ValueError:
         r = re.findall('^(.*?)\s*(?:\(|utc)', line, re.I)
         if r:
@@ -190,6 +188,9 @@ def index():
             background='transparent',
             plot_background='transparent',
             font_family='googlefont:Open Sans',
+            colors=('#3F51B5', '#4C4B4B')
+            
+        
             # title_font_size=12,
         )
         line_chart = pygal.HorizontalBar(
@@ -219,6 +220,41 @@ def index():
     else:
         return render_template('index.html')
 
+
+@app.route('/dns',methods=['GET','POST'])
+def dns():
+    response = None
+    if request.method == "GET":
+        return render_template('dns.html')
+    if request.method == 'POST':
+        input_text = request.form['domain-name-input']
+        response = f"You entered: {input_text}"
+        #  shivam's code 
+        ips = []
+        domain = 'iitram.ac.in'
+        try:
+            answers = dns.resolver.resolve(domain, 'A')
+            for answer in answers:
+                ips.append(str(answer))
+        except (dns.resolver.NXDOMAIN , dns.resolver.NoAnswer , dns.resolver.Timeout , Exception):
+            pass
+        data = None
+        print(ips)
+        ip = "Not Found"
+        if ips:
+            ip = ips[0]
+            print(ip)
+            try:
+                # Make a request to the ipinfo.io API to get location information
+                response = requests.get(f"https://ipinfo.io/{ip}/json")
+                data = response.json()
+            except Exception as e:
+                pass
+        data1 = [
+                {"Domain_name": domain, "ip": ip}
+            ]
+        data2 = [data] 
+        return render_template('dns.html', data1=data1,data2=data2)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Email Header Analysis Author: SK")

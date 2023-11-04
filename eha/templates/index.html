@@ -4,36 +4,27 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
     <meta name="description" content="" />
     <meta name="author" content="" />
     <link rel="icon" href="{{url_for('static', filename='imgs/fav.png')}}" />
-    <title>Email Header Analysis (EHA)</title>
-    <!-- Bootstrap core CSS -->
+    <title>Mail tracer</title>
+
     <link
       href="{{url_for('static', filename='css/bootstrap.min.css')}}"
       rel="stylesheet"
     />
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link
       href="{{url_for('static', filename='css/ie10-viewport-bug-workaround.css')}}"
       rel="stylesheet"
     />
-    <!-- Custom styles for this template -->
     <link
       href="{{url_for('static', filename='css/starter-template.css')}}"
       rel="stylesheet"
     />
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9
-      ]><script src="../../assets/js/ie8-responsive-file-warning.js"></script
-    ><![endif]-->
+
     <script src="{{url_for('static', filename='js/ie-emulation-modes-warning.js')}}"></script>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="{{url_for('static', filename='js/html5shiv.min.js')}}"></script>
-      <script src="{{url_for('static', filename='js/respond.min.js')}}"></script>
-    <![endif]-->
+
     <link
       href="{{url_for('static', filename='css/bootstrap-table.min.css')}}"
       rel="stylesheet"
@@ -67,6 +58,13 @@
         justify-content: center;
         align-items: center;
       }
+      textarea {
+        max-width: 200vh;
+        max-height: 75vh;
+      }
+      textarea:active {
+        border: 1px black solid;
+      }
     </style>
   </head>
 
@@ -88,18 +86,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Email Header Analysis </a>
+          <a class="navbar-brand" href="/">Email Tracer</a>
         </div>
 
         <div id="navbar" class="collapse navbar-collapse">
-          <!-- <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
-            {#
-            <li><a href="#about">About</a></li>
-            #} {#
-            <li><a href="#contact">Contact</a></li>
-            #}
-          </ul> -->
           <ul class="nav navbar-nav navbar-right icons">
             <li>
               <a href="/" target="_blank"><i class="fab fa-github"></i></a>
@@ -263,14 +253,12 @@
                 class="form-control"
                 rows="25"
                 placeholder="Paste the header in here."
-                autofocus
                 required
               ></textarea>
             </div>
             <button
               type="submit"
               class="btn btn-primary btn-lg btn-block x_btn"
-              style=""
             >
               Analyze Header !
             </button>
