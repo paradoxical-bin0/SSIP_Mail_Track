@@ -136,8 +136,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Header Analyze</a>
-          <a href="/dns" class="navbar-brand">DNS Lookup</a>
+          <a class="ha navbar-brand" href="/">Header Analyze</a>
+          <a href="/dns" class="dns navbar-brand">DNS Lookup</a>
         </div>
 
         <div id="navbar" class="collapse navbar-collapse">
@@ -211,5 +211,15 @@
         </div>
        </div>
     {% endif %}
+    <script>
+      const ha = document.querySelector(".ha");
+      const dns = document.querySelector(".dns");
+      if(window.location.pathname === "/"){
+        ha.style.color = "#fff";
+      }
+      else if(window.location.pathname === "/dns"){
+        dns.style.color = "#fff";
+      }
+    </script>
   </body>
 </html>
